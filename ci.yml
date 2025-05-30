@@ -1,0 +1,56 @@
+name: CI HotWheels Project
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: pucrs-projeto-hotwheels
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Instalar dependências da API
+        run: npm install
+        working-directory: pucrs-projeto-hotwheels/hotwheels-api
+
+      - name: Instalar dependências do front-end
+        run: npm install
+        working-directory: pucrs-projeto-hotwheels/my-app
+
+      - name: Lint na API (se configurado)
+        run: npm run lint
+        working-directory: pucrs-projeto-hotwheels/hotwheels-api
+        continue-on-error: true
+
+      - name: Lint no front-end (se configurado)
+        run: npm run lint
+        working-directory: pucrs-projeto-hotwheels/my-app
+        continue-on-error: true
+
+      - name: Build do front-end
+        run: npm run build
+        working-directory: pucrs-projeto-hotwheels/my-app
+
+      - name: Rodar testes (Front-end)
+        run: npx cypress run
+        working-directory: pucrs-projeto-hotwheels/my-app
+        continue-on-error: true
+
+      - name: Testes E2E com Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: pucrs-projeto-hotwheels/my-app
+          start: |
+            npm run start --prefix ../hotwheels-api &
+            npm start
+          wait-on: 'http://localhost:3000,http://localhost:5000'
+          wait-on-timeout: 60
