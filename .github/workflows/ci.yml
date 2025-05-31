@@ -26,16 +26,6 @@ jobs:
         run: npm install
         working-directory: pucrs-projeto-hotwheels/my-app
 
-      - name: Lint na API (se configurado)
-        run: npm run lint
-        working-directory: pucrs-projeto-hotwheels/hotwheels-api
-        continue-on-error: true
-
-      - name: Lint no front-end (se configurado)
-        run: npm run lint
-        working-directory: pucrs-projeto-hotwheels/my-app
-        continue-on-error: true
-
       - name: Build do front-end
         run: npm run build
         working-directory: pucrs-projeto-hotwheels/my-app
