@@ -6,7 +6,7 @@ export default function Navbar() {
 
     return (
         <div className="flex justify-center bg-[#8c0708] gap-10 pl-10 py-5 content-center items-center h-15 text-xl font-mono text-white shadow-lg shadow-black">
-            <img src={icon} className='h-20 w-20 rounded-lg'/>
+            <img src={icon} className='h-20 w-20 rounded-lg' alt="Icone Hotwheels"/>
             <div>
                 <Link to="/" className={location.pathname=== '/' ? 'font-bold underline' : 'capitalize'}>Home</Link>
             </div>
