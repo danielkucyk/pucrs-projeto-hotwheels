@@ -20,7 +20,7 @@ jobs:
 
       - name: Instalar dependências da API
         run: npm install
-        working-directory: pucrs-projeto-hotwheels/hotwheels-api
+        working-directory: ./hotwheels-api
 
       - name: Instalar dependências do front-end
         run: npm install
