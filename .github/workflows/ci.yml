@@ -24,21 +24,21 @@ jobs:
 
       - name: Instalar dependências do front-end
         run: npm install
-        working-directory: pucrs-projeto-hotwheels/my-app
+        working-directory: ./my-app
 
       - name: Build do front-end
         run: npm run build
-        working-directory: pucrs-projeto-hotwheels/my-app
+        working-directory: ./my-app
 
       - name: Rodar testes (Front-end)
         run: npx cypress run
-        working-directory: pucrs-projeto-hotwheels/my-app
+        working-directory: ./my-app
         continue-on-error: true
 
       - name: Testes E2E com Cypress
         uses: cypress-io/github-action@v6
         with:
-          working-directory: pucrs-projeto-hotwheels/my-app
+          working-directory: ./my-app
           start: |
             npm run start --prefix ../hotwheels-api &
             npm start
