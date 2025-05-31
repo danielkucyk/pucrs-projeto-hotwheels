@@ -10,9 +10,9 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: pucrs-projeto-hotwheels
+    # defaults:
+    #   run:
+    #     working-directory: pucrs-projeto-hotwheels
 
     steps:
       - name: Checkout do código
