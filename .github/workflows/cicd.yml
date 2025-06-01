@@ -70,7 +70,7 @@ jobs:
             aws-region: sa-east-1
 
         - name: Deploy to S3
-          run: aws s3 sync ./my-app/build s3://meu-bucket-hotwheels --delete
+          run: aws s3 sync ./my-app/build s3://pucrs-hotwheels-frontend --delete
 
         - name: Invalidate CloudFront cache
           run: |
