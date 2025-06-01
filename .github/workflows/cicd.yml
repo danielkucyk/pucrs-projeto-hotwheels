@@ -50,10 +50,6 @@ jobs:
           with:
             node-version: 18
 
-        - name: Instalar dependências da API
-          run: npm install
-          working-directory: ./hotwheels-api
-
         - name: Instalar dependências do front-end
           run: npm install
           working-directory: ./my-app
