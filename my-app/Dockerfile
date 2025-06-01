@@ -1,5 +1,5 @@
 # Etapa 1: Build da aplicação
-FROM 23-alpine AS builder
+FROM node:slim AS builder
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ COPY . .
 RUN npm run build
 
 # Etapa 2: Imagem final com NGINX
-FROM stable-alpine
+FROM nginx:stable-alpine
 
 # Limpa o conteúdo padrão do NGINX
 RUN rm -rf /usr/share/nginx/html/*
