@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout do código
         uses: actions/checkout@v3
@@ -26,12 +26,12 @@ jobs:
         run: npm run build
         working-directory: ./my-app
 
-      - name: Aciona a API e o frontend para testes
-        run: |
-          npm --prefix ./hotwheels-api run start &
-          npm --prefix ./my-app run start &
-        
-      - name: Testes com Cypress
-        run: npx cypress run
-        working-directory: ./my-app
-
+      - name: Testes E2E com Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./my-app
+          start: |
+            npm run start --prefix ../hotwheels-api &
+            npm start
+          wait-on: 'http://localhost:3000,http://localhost:5000'
+          wait-on-timeout: 60
