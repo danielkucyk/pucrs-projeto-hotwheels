@@ -29,8 +29,8 @@ jobs:
       - name: Aciona a API e o frontend para testes
         run: |
           npm --prefix ./hotwheels-api run start &
-          npm --prefix ./app2 run start &
-          wait-on http://localhost:3000 http://localhost:5000
+          npm --prefix ./my-app run start &
+          wait-on: http://localhost:3000 http://localhost:5000
 
       - name: Testes com Cypress
         run: npx cypress run
