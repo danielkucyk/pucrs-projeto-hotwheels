@@ -48,8 +48,8 @@ describe('template spec', () => {
 
   it('deve validar os campos de informacoes e adicionar um carro', () => {
     cy.intercept("POST", 'http://localhost:5000/cars').as('addCar')
-    // const stub = cy.stub()
-    // cy.on('window:alert', stub)
+    const stub = cy.stub()
+    cy.on('window:alert', stub)
     cy.visit('/carForm')
     cy.get('button').click().then(() => expect(stub).to.be.calledWith("Insira o nome do carro"))
     cy.get('input[type="text"]').first().type("Teste Nome Add")
@@ -74,8 +74,8 @@ describe('template spec', () => {
     cy.wait(500)
     cy.intercept("POST", 'http://localhost:5000/cars').as('editList')
     cy.intercept("GET", 'http://localhost:5000/cars').as('getList')
-    // const stub = cy.stub()
-    // cy.on('window:alert', stub)
+    const stub = cy.stub()
+    cy.on('window:alert', stub)
     cy.visit('/carsList')
     cy.get('[data-cy="car-item"]').last().click()
     cy.get('input[type="text"]').first().clear()
