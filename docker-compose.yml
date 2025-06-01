@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api:
+    image: danielkucyk/pucrs-projeto-hotwheels-api:latest
+    ports:
+      - "5000:5000"
+
+  app:
+    image: danielkucyk/pucrs-projeto-hotwheels-app:latest
+    ports:
+      - "3000:3000"

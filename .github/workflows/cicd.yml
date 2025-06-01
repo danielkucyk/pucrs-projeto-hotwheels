@@ -67,3 +67,27 @@ jobs:
 
         - name: Deploy to S3
           run: aws s3 sync ./my-app/build s3://pucrs-hotwheels-frontend --delete
+
+        - name: Build Docker Image Frontend
+          run: docker build -t hotwheels-frontend .
+          working-directory: ./my-app
+        
+        - name: Build Docker Image API
+          run: docker build -t hotwheels-api .
+          working-directory: ./hotwheels-api
+
+        - name: Log in to Docker Hub
+          uses: docker/login-action@v3
+          with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+        - name: Push Docker Image Frontend
+          run: |
+            docker tag hotwheels-frontend ${{ secrets.DOCKERHUB_USERNAME }}/pucrs-projeto-hotwheels-app:latest
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/pucrs-projeto-hotwheels-app:latest
+
+        - name: Push Docker Image API
+          run: |
+            docker tag hotwheels-api ${{ secrets.DOCKERHUB_USERNAME }}/pucrs-projeto-hotwheels-api:latest
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/pucrs-projeto-hotwheels-api:latest
